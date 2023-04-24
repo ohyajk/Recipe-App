@@ -10,7 +10,7 @@ class FoodlistsController < ApplicationController
   def destroy
     @foodlist = Foodlist.find(params[:id])
     @foodlist.destroy
-    redirect_to foodlists_url, :notice => "Successfully destroyed foodlist."
+    redirect_to foodlists_url, notice: 'Successfully destroyed foodlist.'
   end
 
   def new
@@ -20,13 +20,14 @@ class FoodlistsController < ApplicationController
   def create
     @foodlist = Foodlist.new(params[:foodlist])
     if @foodlist.save
-      redirect_to @foodlist, :notice => "Successfully created foodlist."
+      redirect_to @foodlist, notice: 'Successfully created foodlist.'
     else
-      render :action => 'new'
+      render action: 'new'
     end
   end
 
   private
+
   def foodlist_params
     params.require(:foodlist).permit(:measurement_unit, :price, :quantity)
   end
