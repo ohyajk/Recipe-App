@@ -8,9 +8,11 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = { corePlugins: { preflight: false } }</script>
   </head>
 
-  <body>
+  <body class="m-0">
     <%= yield %>
   </body>
 </html>
