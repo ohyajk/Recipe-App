@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'recipelists/index'
+  get 'recipelists/show'
   get 'foodlists/index'
   get 'foodlists/show'
   devise_for :users
@@ -6,5 +8,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "foodlists#index"
-  resources :foods
+  resources :foodlists
+  resources :recipelists
 end
