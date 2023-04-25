@@ -6,8 +6,14 @@
 
   <div>
     <% @recipelists.each do |recipe| %>
-      <%= link_to recipe_path(recipe), class: "k" do %>
+      <% if current_user.id == recipe.user_id %>
+        <%= link_to recipe_path(recipe), class: "" do %>
           <%= render recipe %>
+        <% end %>
+      <% else %>
+        <%= link_to public_recipes_path(recipe), class: "" do %>
+          <%= render recipe %>
+        <% end %>
       <% end %>
     <% end %>
   </div>
