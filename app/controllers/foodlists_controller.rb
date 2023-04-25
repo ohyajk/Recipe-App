@@ -1,6 +1,7 @@
 class FoodlistsController < ApplicationController
   def index
     @foodlist = Foodlist.all
+    @user = current_user
   end
 
   def show
@@ -21,6 +22,8 @@ class FoodlistsController < ApplicationController
 
   def create
     @foodlist = Foodlist.new(foodlist_params)
+    @foodlist.user_id = current_user.id
+
     if @foodlist.save
       redirect_to @foodlist, notice: 'Successfully created foodlist.'
     else
