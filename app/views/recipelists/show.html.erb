@@ -1,1 +1,61 @@
-<h1>Single Recipe lists</h1>
+<div class="">
+<h2 class=""><%= @recipe.name %></h2>
+  <div>
+    <div class="">
+      <div class="">
+        <p>
+          <strong>Preparation Time:&nbsp;</strong>
+          <%= @recipe.preparation_time %> hour
+        </p>
+        <p>
+          <strong>Cooking Time:&nbsp;</strong>
+          <%= @recipe.cooking_time %> hour
+        </p>
+        <p>
+          <strong>steps go here...</strong>
+        </p>
+      </div>
+
+      <div class="">
+        <div>
+          <%= form_with(model: @recipe) do |form| %>
+            Public: <%= form.check_box :public, :value => @recipe.public, disabled: true %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="">
+      <div class="">
+        <%= link_to 'Generate Shopping List', '#', class: ""  %>
+        <%= link_to 'Add Ingredient', '#', class: "" %>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="">
+    <table class="">
+      <thead>
+        <tr class="">
+          <th>Food</th>
+          <th>Quantity</th>
+          <th>Value</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @recipe.recipe_food.each do |recipe_food| %>
+          <tr class="">
+            <td colspan="4"><%= recipe_food.food.name %></td>
+            <td><%= recipe_food.quantity %> <%= recipe_food.food.measurement_unit%> </td>
+            <td><%= recipe_food.food.price * recipe_food.quantity%></td>
+            <td>
+              <%= link_to 'Delete', recipe_recipe_food_path(@recipe, recipe_food), method: :delete, data: { confirm: 'Are you sure?' }, class: "" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

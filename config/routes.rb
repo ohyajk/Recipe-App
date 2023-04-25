@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'users/index'
+  get 'users/show'
   get 'recipelists/index'
   get 'recipelists/show'
   get 'foodlists/index'
@@ -11,6 +13,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "foodlists#index"
   resources :foodlists
-  resources :recipelists
-  resources :recipe_foods
+  resources :recipelists do
+    resources :recipe_foods
+  end
 end
