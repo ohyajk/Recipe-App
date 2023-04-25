@@ -1,5 +1,6 @@
 <h1>New Food</h1>
-<%= form_with model: @food, url: foods_path do |f| %>
+
+<%= form_for @foodlist do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
   <%= f.label :measurement_unit %>
@@ -10,14 +11,14 @@
   <%= f.number_field :quantity %>
   <%= f.submit "Create Food" %>
 <% end %>
-<% if @food.errors.any? %>
+<% if @foodlist.errors.any? %>
   <div id="error_explanation">
-    <h2><%= pluralize(@food.errors.count, "error") %> prohibited this food from being saved:</h2>
+    <h2><%= pluralize(@foodlist.errors.count, "error") %> prohibited this food from being saved:</h2>
 
     <ul>
-    <% @food.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
+     <% @foodlist.errors.full_messages.each do |message| %>
+       <li><%= message %></li>
+     <% end %>
     </ul>
   </div>
 <% end %>

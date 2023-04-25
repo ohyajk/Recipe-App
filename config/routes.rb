@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get 'users/index'
   get 'users/show'
+  get 'users/index'
+  get 'users/show'
   get 'recipelists/index'
   get 'recipelists/show'
   get 'foodlists/index'

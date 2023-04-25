@@ -14,11 +14,13 @@ class FoodlistsController < ApplicationController
   end
 
   def new
+    puts 'Entering new action'
     @foodlist = Foodlist.new
+    puts "@foodlist: #{@foodlist.inspect}"
   end
 
   def create
-    @foodlist = Foodlist.new(params[:foodlist])
+    @foodlist = Foodlist.new(foodlist_params)
     if @foodlist.save
       redirect_to @foodlist, notice: 'Successfully created foodlist.'
     else
