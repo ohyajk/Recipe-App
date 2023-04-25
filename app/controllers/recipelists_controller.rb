@@ -4,12 +4,10 @@ class RecipelistsController < ApplicationController
 
   def index
     @recipelists = if params[:user_id].present?
-      Recipelist.includes(recipe_foods: [:food]).order(:name).where(user_id: params[:user_id])
-    else
-      Recipelist.includes(recipe_foods: [:food]).order(:name)
-    end
-
-
+                     Recipelist.includes(recipe_foods: [:food]).order(:name).where(user_id: params[:user_id])
+                   else
+                     Recipelist.includes(recipe_foods: [:food]).order(:name)
+                   end
   end
 
   def show
