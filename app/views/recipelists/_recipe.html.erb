@@ -16,3 +16,25 @@
     </div>
   </div>
 </div>
+
+
+<div class="" id="<%= dom_id recipe %>">
+  <div class="">
+    <div class="">
+      <h3>
+        <%= link_to recipe_path(recipe.user, recipe), class: "" do %>
+          <%= recipe.name%>
+        <% end %>
+      </h3>
+      <% if current_user.id == recipe.user_id %>
+      <%= button_to "Remove", user_recipe_path(recipe.user, recipe), class: "", method: :delete %>
+      <% end %>
+    </div>
+    <div class="">
+      <p>
+        <strong>Description:</strong>
+        <%= recipe.description %>
+      </p>
+    </div>
+  </div>
+</div>

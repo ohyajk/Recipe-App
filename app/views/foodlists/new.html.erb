@@ -16,9 +16,9 @@
     <h2><%= pluralize(@foodlist.errors.count, "error") %> prohibited this food from being saved:</h2>
 
     <ul>
-     <% @foodlist.errors.full_messages.each do |message| %>
-       <li><%= message %></li>
-     <% end %>
+      <% @foodlist.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
     </ul>
   </div>
 <% end %>

@@ -27,8 +27,12 @@
 
     <div class="">
       <div class="">
-        <%= link_to 'Generate Shopping List', '#', class: ""  %>
-        <%= link_to 'Add Ingredient', '#', class: "" %>
+
+        <% if current_user && current_user.id == @recipe.user_id %>
+        <%= link_to 'Generate Shopping List', shopping_list_path, class: ""  %>
+        <%= link_to 'Add Ingredient', new_user_recipe_recipe_food_path(user_id: @recipe.user_id, recipe_id: @recipe.id), class: "" %>
+        <% end %>
+
       </div>
     </div>
   </div>
@@ -40,7 +44,9 @@
           <th>Food</th>
           <th>Quantity</th>
           <th>Value</th>
-          <th>Actions</th>
+          <% if current_user && current_user.id == @recipe.user_id %>
+            <th>Actions</th>
+          <% end %>
         </tr>
       </thead>
 
@@ -49,10 +55,17 @@
           <tr class="">
             <td colspan="4"><%= recipe_food.food.name %></td>
             <td><%= recipe_food.quantity %> <%= recipe_food.food.measurement_unit%> </td>
-            <td><%= recipe_food.food.price * recipe_food.quantity%></td>
+            <td>$<%= recipe_food.food.price * recipe_food.quantity%></td>
             <td>
               <%= link_to 'Delete', recipe_recipe_food_path(@recipe, recipe_food), method: :delete, data: { confirm: 'Are you sure?' }, class: "" %>
             </td>
+
+            <% if current_user && current_user.id == @recipe.user_id %>
+              <td>
+                <%= button_to 'Delete', user_recipe_recipe_food_path(recipe_id: @recipe.id, id: recipe_food.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-secondary" %>
+              </td>
+            <% end %>
+
           </tr>
         <% end %>
       </tbody>

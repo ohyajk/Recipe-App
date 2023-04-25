@@ -1,6 +1,13 @@
 class RecipelistsController < ApplicationController
+  before_action :authenticate_user!
+  skip_before_action :authenticate_user!, only: %i[show]
+
   def index
-    @recipelists = Recipelist.all
+    @recipelists = if params[:user_id].present?
+                     Recipelist.includes(recipe_foods: [:food]).order(:name).where(user_id: params[:user_id])
+                   else
+                     Recipelist.includes(recipe_foods: [:food]).order(:name)
+                   end
   end
 
   def show
