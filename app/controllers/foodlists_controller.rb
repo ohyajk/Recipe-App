@@ -14,7 +14,7 @@ class FoodlistsController < ApplicationController
   end
 
   def new
-    puts "Entering new action"
+    puts 'Entering new action'
     @foodlist = Foodlist.new
     puts "@foodlist: #{@foodlist.inspect}"
   end
