@@ -1,21 +1,21 @@
- <div class="">
-    <h2 class="">
-       Shopping List
+ <div>
+    <h2>
+        Shopping List
     </h2>
 
-    <div class="">
-       <div class="">
-           Amount of food items to buy: <%= @ingredients.length %>
-       </div>
-       <div class="">
-           Total value of food needed: $<%= @total_price %>
-       </div>
+    <div>
+        <div>
+          Amount of food items to buy: <%= @ingredients.length %>
+        </div>
+      <div>
+          Total value of food needed: $<%= @total_price %>
+      </div>
     </div>
  </div>
- <div class="">
-    <table class="">
+ <div>
+    <table>
       <thead>
-        <tr class="">
+        <tr>
           <th>Food</th>
           <th>Quantity</th>
           <th>Price</th>
@@ -23,7 +23,7 @@
       </thead>
       <tbody>
         <% @ingredients.each do |food, ingredients| %>
-        <tr class="">
+        <tr>
           <td><%= food %></td>
           <td>
             <% if ingredients.length == 1 %>
