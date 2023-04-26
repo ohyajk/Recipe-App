@@ -1,14 +1,13 @@
 <div class="mx-auto mt-10 max-w-xl">
-  <h1 class="text-3xl font-bold mb-6 text-center">Food List</h1>
-  <%= link_to "Add New Food", new_user_food_path(@user), class: "inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mb-4 no-underline" %>
+  <%= link_to "Add New Food", new_user_food_path(@user), class: "inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mb-4 no-underline text-right" %>
   <table class="w-full border-collapse">
     <thead>
       <tr>
-        <th class="py-2 px-4 bg-gray-100 font-bold uppercase text-sm text-gray-600 border border-gray-200">Name</th>
-        <th class="py-2 px-4 bg-gray-100 font-bold uppercase text-sm text-gray-600 border border-gray-200">Measurement Unit</th>
-        <th class="py-2 px-4 bg-gray-100 font-bold uppercase text-sm text-gray-600 border border-gray-200">Price</th>
-        <th class="py-2 px-4 bg-gray-100 font-bold uppercase text-sm text-gray-600 border border-gray-200">Quantity</th>
-        <th class="py-2 px-4 bg-gray-100 font-bold uppercase text-sm text-gray-600 border border-gray-200">Action</th>
+        <th class="py-2 px-8 bg-gray-100 font-bold uppercase text-sm text-gray-600 border border-gray-200">Food</th>
+        <th class="py-2 px-8 bg-gray-100 font-bold uppercase text-sm text-gray-600 border border-gray-200">Measurement Unit</th>
+        <th class="py-2 px-8 bg-gray-100 font-bold uppercase text-sm text-gray-600 border border-gray-200">Unit Price</th>
+        <th class="py-2 px-8 bg-gray-100 font-bold uppercase text-sm text-gray-600 border border-gray-200">Quantity</th>
+        <th class="py-2 px-8 bg-gray-100 font-bold uppercase text-sm text-gray-600 border border-gray-200">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -16,7 +15,7 @@
         <tr class="border-b border-gray-200 hover:bg-gray-100">
           <td class="py-2 px-4 border border-gray-200"><%= food.name %></td>
           <td class="py-2 px-4 border border-gray-200"><%= food.measurement_unit %></td>
-          <td class="py-2 px-4 border border-gray-200"><%= food.price %></td>
+          <td class="py-2 px-4 border border-gray-200">$<%= food.price %></td>
           <td class="py-2 px-4 border border-gray-200"><%= food.quantity %></td>
           <td class="py-2 px-4 border border-gray-200">
             <%= button_to "Delete", user_food_path(@user, food), method: :delete, data: { confirm: "Are you sure?" }, class: "bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded-full focus:outline-none" %>
