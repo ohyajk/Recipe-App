@@ -1,7 +1,7 @@
-<div id="<%= dom_id recipe %>" class="">
-  <div class="">
+<div id="<%= dom_id recipe %>" >
+  <div>
     <div>
-      <h2><%= link_to user_recipe_path(recipe.user.id, recipe.id), class: "" do %>
+      <h2><%= link_to user_recipe_path(recipe.user.id, recipe.id), do %>
           <%= recipe.name%>
         <% end %></h2>
       <p>By: <%= recipe.user.name %></p>
