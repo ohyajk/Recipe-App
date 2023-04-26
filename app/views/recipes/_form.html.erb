@@ -1,0 +1,44 @@
+<%= form_with(model: User.new, scope: :recipe, url: user_recipes_path) do |form| %>
+  <% if form.object.errors.any? %>
+    <div>
+      <h2><%= pluralize(form.object.errors.count, "error") %> prohibited this recipe from being saved:</h2>
+
+      <ul>
+        <% form.object.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, "Recipe Name", for: "recipe_name" %>
+    <%= form.text_field :name, id: "recipe_name" %>
+  </div>
+
+  <div>
+    <%= form.label :preparation_time, "Preparation Time (minutes)" %>
+    <%= form.number_field :preparation_time %>
+  </div>
+
+  <div>
+    <%= form.label :cooking_time, "Cooking Time (minutes)" %>
+    <%= form.number_field :cooking_time %>
+  </div>
+
+  <div>
+    <%= form.label :description, "Description" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :public, "Make this recipe public?" %>
+    <%= form.check_box :public, role: "switch" %>
+  </div>
+
+  <%= form.hidden_field :user_id %>
+
+  <div>
+    <%= form.submit 'Create Recipe' %>
+  </div>
+<% end %>
