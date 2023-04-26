@@ -7,6 +7,7 @@
       <% if user_signed_in?%>
         <%= link_to "Recipes" , user_recipes_path(user_id: current_user.id), class: "text-gray-700 hover:text-blue-500 no-underline" %>
         <%= link_to "Shopping list", shopping_list_path, class: "text-gray-700 hover:text-blue-500 no-underline" %>
+        <%= link_to "Public Recipes", public_recipes_path, class: "text-gray-700 hover:text-blue-500 no-underline" %>
       <%end%>
       <%if user_signed_in?%>
         <p class="text-gray-700">Welcome <%= current_user.name.capitalize %>!</p>
