@@ -1,6 +1,4 @@
 class ShoppingListController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[index]
-
   def index
     @user = current_user
     @recipe = Recipelist.where(user: @user)
