@@ -1,32 +1,32 @@
 class FoodlistsController < ApplicationController
   # before_action :authenticate_user!
   def index
-    @foodlist = Foodlist.all
+    @food = Food.all
     @user = current_user
   end
 
   def show
-    @foodlist = Foodlist.find(params[:id])
+    @food = Food.find(params[:id])
   end
 
   def destroy
-    @foodlist = Foodlist.find(params[:id])
-    @foodlist.destroy
+    @food = Food.find(params[:id])
+    @food.destroy
     redirect_to foodlists_url, notice: 'Successfully destroyed foodlist.'
   end
 
   def new
     puts 'Entering new action'
-    @foodlist = Foodlist.new
-    puts "@foodlist: #{@foodlist.inspect}"
+    @food = Food.new
+    puts "@food: #{@foodlist.inspect}"
   end
 
   def create
-    @foodlist = Foodlist.new(foodlist_params)
-    @foodlist.user_id = current_user.id
+    @food = Food.new(food_params)
+    @food.user_id = current_user.id
 
-    if @foodlist.save
-      redirect_to @foodlist, notice: 'Successfully created foodlist.'
+    if @food.save
+      redirect_to @food, notice: 'Successfully created foodlist.'
     else
       render action: 'new'
     end
@@ -34,7 +34,7 @@ class FoodlistsController < ApplicationController
 
   private
 
-  def foodlist_params
-    params.require(:foodlist).permit(:name, :measurement_unit, :price, :quantity)
+  def food_params
+    params.require(:food).permit(:name, :measurement_unit, :price, :quantity)
   end
 end
