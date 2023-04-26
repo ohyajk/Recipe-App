@@ -1,71 +1,69 @@
-<div class="bg-white rounded-lg shadow-lg p-6">
-  <h2 class="text-3xl font-bold mb-4"><%= @recipe.name %></h2>
+<div class="recipe-show">
+  <h2 class=""><%= @recipe.name %></h2>
+  <div>
+    <div class="">
+      <div class="prep">
+        <div class="preparation">
+          <p>
+            <strong>Preparation Time:&nbsp;</strong>
+            <%= @recipe.preparation_time %> hour
+          </p>
 
-  <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-    <div>
-      <p class="text-lg font-medium mb-2">
-        <strong>Preparation Time:</strong>
-        <%= @recipe.preparation_time %> hour
-      </p>
-      <p class="text-lg font-medium">
-        <strong>Cooking Time:</strong>
-        <%= @recipe.cooking_time %> hour
-      </p>
-
-      <hr class="my-6">
-
-      <p class="text-lg font-medium mb-4">
-        <strong>Steps:</strong>
-      </p>
-      <div class="text-lg mb-8">
-        <%= @recipe.steps %>
-      </div>
-
-      <div class="flex justify-between items-center">
-        <div>
-          <%= form_with(url: user_recipe_path(@recipe)) do |form| %>
-            <label class="inline-flex items-center">
-              <%= form.check_box :public, { checked: @recipe.public, disabled: true }, class: "form-checkbox h-5 w-5 text-gray-600" %>
-              <span class="ml-2 text-gray-700 font-medium">Public</span>
-            </label>
-          <% end %>
+          <div class="check-box">
+            <%= form_with(url: user_recipe_path(@recipe)) do |form| %>
+              Public: <%= form.check_box :public, { checked: @recipe.public, disabled: true }, class: 'check-bo' %>
+            <% end %>
         </div>
-        <% if current_user && current_user.id == @recipe.user_id %>
-          <div>
-            <%= link_to 'Generate Shopping List', shopping_list_path, class: "text-blue-600 hover:underline mr-4" %>
-            <%= link_to 'Add New Ingredient', new_user_recipe_recipe_food_path(user_id: @recipe.user_id, recipe_id: @recipe.id), class: "text-blue-600 hover:underline" %>
-          </div>
+        </div>
+        <p>
+          <strong>Cooking Time:&nbsp;</strong>
+          <%= @recipe.cooking_time %> hour
+        </p>
+        <p>
+          <strong>steps go here...</strong>
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-10">
+      <div class="recipe-show-buttons">
+      <% if current_user && current_user.id == @recipe.user_id %>
+        <%= link_to 'Generate Shopping List', shopping_list_path, class: "generate-shopping-list"  %>
+        <%= link_to 'Add Ingredient', new_user_recipe_recipe_food_path(user_id: @recipe.user_id, recipe_id: @recipe.id), class: "add-ingredient" %>
         <% end %>
       </div>
     </div>
 
-    <div>
-      <table class="w-full">
-        <thead>
-          <tr class="bg-gray-100 border-b border-gray-200">
-            <th class="py-3 text-left font-medium">Food</th>
-            <th class="py-3 text-left font-medium">Quantity</th>
-            <th class="py-3 text-left font-medium">Value</th>
-            <% if current_user && current_user.id == @recipe.user_id %>
-              <th class="py-3 text-left font-medium">Actions</th>
-            <% end %>
-          </tr>
-        </thead>
+  </div>
 
-        <tbody>
-          <% @recipe.recipe_foods.each do |recipe_food| %>
-            <tr class="border-b border-gray-200">
-              <td class="py-3"><%= recipe_food.food.name %></td>
-              <td class="py-3"><%= recipe_food.quantity %> <%= recipe_food.food.measurement_unit %></td>
-              <td class="py-3">$<%= recipe_food.food.price * recipe_food.quantity %></td>
-              <% if current_user && current_user.id == @recipe.user_id %>
-                <td class="py-3">
-                  <%= button_to 'Delete', user_recipe_recipe_food_path(recipe_id: @recipe.id, id: recipe_food.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "text-red-600 font-medium hover:underline" %>
-                </td>
-              <% end %>
-            </tr>
+  <hr class="recipe-show-line">
+
+  <div class="">
+    <table class="table-auto w-full ml-32">
+      <thead class="">
+        <tr class="bg-gray-200 text-gray-700">
+          <th class="py-2 px-8 font-semibold">Food</th>
+          <th class="py-2 px-8 font-semibold">Quantity</th>
+          <th class="py-2 px-8 font-semibold">Value</th>
+          <% if current_user && current_user.id == @recipe.user_id %>
+          <th class="py-2 px-8 font-semibold">Actions</th>
           <% end %>
-        </tbody>
-      </table>
-    </div>
-
+        </tr>
+      </thead>
+      <tbody>
+        <% @recipe.recipe_foods.each do |recipe_food| %>
+        <tr class="text-center border-b border-gray-300">
+          <td class="py-2 px-4"><%= recipe_food.food.name %></td>
+          <td class="py-2 px-4"><%= recipe_food.quantity %> <%= recipe_food.food.measurement_unit%> </td>
+          <td class="py-2 px-4">$<%= recipe_food.food.price * recipe_food.quantity%></td>
+          <% if current_user && current_user.id == @recipe.user_id %>
+          <td class="py-2 px-4">
+            <%= button_to 'Delete', user_recipe_recipe_food_path(recipe_id: @recipe.id, id: recipe_food.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full" %>
+          </td>
+          <% end %>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+  </div>
+</div>
