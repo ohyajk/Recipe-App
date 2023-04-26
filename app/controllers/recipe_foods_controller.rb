@@ -1,6 +1,6 @@
 class RecipeFoodsController < ApplicationController
   def index
-    @recipe_foods = Foodlit.all
+    @recipe_foods = Food.all
   end
 
   def new
@@ -9,13 +9,13 @@ class RecipeFoodsController < ApplicationController
   end
 
   def create
-    @recipelist = Recipelist.find(params[:recipe_id])
+    @recipe = Recipe.find(params[:recipe_id])
     @recipe_food = @recipe.recipe_foods.new(recipe_food_params)
 
     respond_to do |format|
       if @recipe_food.save
         format.html do
-          redirect_to user_recipe_path(user_id: @recipelist.user_id, id: @recipelist.id),
+          redirect_to user_recipe_path(user_id: @recipe.user_id, id: @recipe.id),
                       notice: 'Recipe food was successfully created.'
         end
       else
