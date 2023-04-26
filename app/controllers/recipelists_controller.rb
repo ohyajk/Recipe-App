@@ -4,14 +4,16 @@ class RecipelistsController < ApplicationController
 
   def index
     @recipelists = if params[:user_id].present?
-                     Recipelist.includes(recipe_foods: [:food]).order(:name).where(user_id: params[:user_id])
+                     Recipelist.includes(recipe_foods: [:foodlist]).order(:id)
                    else
-                     Recipelist.includes(recipe_foods: [:food]).order(:name)
+                     Recipelist.all
                    end
   end
 
   def show
     @recipelist = Recipelist.find(params[:id])
+    return if @recipe.nil?
+
     @recipe_foods = @recipelist.recipe_foods
   end
 
@@ -25,7 +27,7 @@ class RecipelistsController < ApplicationController
     @recipelist = Recipelist.new(recipelist_params)
 
     if @recipelist.save
-      redirect_to recipelist_path(@recipelist), notice: 'Recipelist was successfully created.'
+      redirect_to user_recipes_path(@recipelist), notice: 'Recipelist was successfully created.'
     else
       render :new
     end
@@ -34,14 +36,10 @@ class RecipelistsController < ApplicationController
   def destroy
     @recipelist = Recipelist.find(params[:id])
     @recipelist.destroy
-    redirect_to recipelists_path, notice: 'Recipelist was successfully destroyed.'
+    redirect_to user_recipe_path, notice: 'Recipelist was successfully destroyed.'
   end
 
   private
-
-  def set_recipelist
-    @recipelist = Recipelist.find(params[:id])
-  end
 
   def recipelist_params
     params.require(:recipelist).permit(:name, :preparation_time, :cooking_time, :description, :public, :user_id)
