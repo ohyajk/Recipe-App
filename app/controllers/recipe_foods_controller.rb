@@ -6,6 +6,8 @@ class RecipeFoodsController < ApplicationController
   def new
     @recipe_food = RecipeFood.new
     @recipe_food.recipe_id = params[:recipe_id]
+    @user = User.find(params[:user_id])
+    @foods = Food.all
   end
 
   def create
