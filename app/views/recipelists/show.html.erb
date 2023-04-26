@@ -1,15 +1,15 @@
 <div class="">
-<h2 class=""><%= @recipe.name %></h2>
+<h2 class=""><%= @recipelists.name %></h2>
   <div>
     <div class="">
       <div class="">
         <p>
           <strong>Preparation Time:&nbsp;</strong>
-          <%= @recipe.preparation_time %> hour
+          <%= @recipelists.preparation_time %> hour
         </p>
         <p>
           <strong>Cooking Time:&nbsp;</strong>
-          <%= @recipe.cooking_time %> hour
+          <%= @recipelists.cooking_time %> hour
         </p>
         <p>
           <strong>steps go here...</strong>
@@ -18,8 +18,8 @@
 
       <div class="">
         <div>
-          <%= form_with(model: @recipe) do |form| %>
-            Public: <%= form.check_box :public, :value => @recipe.public, disabled: true %>
+          <%= form_with(model: @recipelists) do |form| %>
+            Public: <%= form.check_box :public, :value => @recipelists.public, disabled: true %>
           <% end %>
         </div>
       </div>
@@ -28,9 +28,9 @@
     <div class="">
       <div class="">
 
-        <% if current_user && current_user.id == @recipe.user_id %>
+        <% if current_user && current_user.id == @recipelists.user_id %>
         <%= link_to 'Generate Shopping List', shopping_list_path, class: ""  %>
-        <%= link_to 'Add Ingredient', new_user_recipe_recipe_food_path(user_id: @recipe.user_id, recipe_id: @recipe.id), class: "" %>
+        <%= link_to 'Add Ingredient', new_user_recipe_recipe_food_path(user_id: @recipelists.user_id, recipe_id: @recipelists.id), class: "" %>
         <% end %>
 
       </div>
@@ -44,25 +44,25 @@
           <th>Food</th>
           <th>Quantity</th>
           <th>Value</th>
-          <% if current_user && current_user.id == @recipe.user_id %>
+          <% if current_user && current_user.id == @recipelists.user_id %>
             <th>Actions</th>
           <% end %>
         </tr>
       </thead>
 
       <tbody>
-        <% @recipe.recipe_food.each do |recipe_food| %>
+        <% @recipelists.recipe_food.each do |recipe_food| %>
           <tr class="">
             <td colspan="4"><%= recipe_food.food.name %></td>
             <td><%= recipe_food.quantity %> <%= recipe_food.food.measurement_unit%> </td>
             <td>$<%= recipe_food.food.price * recipe_food.quantity%></td>
             <td>
-              <%= link_to 'Delete', recipe_recipe_food_path(@recipe, recipe_food), method: :delete, data: { confirm: 'Are you sure?' }, class: "" %>
+              <%= link_to 'Delete', recipe_recipe_food_path(@recipelists, recipe_food), method: :delete, data: { confirm: 'Are you sure?' }, class: "" %>
             </td>
 
-            <% if current_user && current_user.id == @recipe.user_id %>
+            <% if current_user && current_user.id == @recipelists.user_id %>
               <td>
-                <%= button_to 'Delete', user_recipe_recipe_food_path(recipe_id: @recipe.id, id: recipe_food.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-secondary" %>
+                <%= button_to 'Delete', user_recipe_recipe_food_path(recipe_id: @recipelists.id, id: recipe_food.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-secondary" %>
               </td>
             <% end %>
 

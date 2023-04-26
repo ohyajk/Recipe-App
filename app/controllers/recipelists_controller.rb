@@ -4,7 +4,7 @@ class RecipelistsController < ApplicationController
 
   def index
     @recipelists = if params[:user_id].present?
-                     Recipelist.includes(recipe_foods: [:foodlist]).order(:id)
+                     Recipelist.includes(recipe_foods: [:foodlists]).order(:id)
                    else
                      Recipelist.all
                    end
@@ -12,7 +12,7 @@ class RecipelistsController < ApplicationController
 
   def show
     @recipelist = Recipelist.find(params[:id])
-    return if @recipe.nil?
+    return if @recipelist.nil?
 
     @recipe_foods = @recipelist.recipe_foods
   end
