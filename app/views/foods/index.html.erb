@@ -18,7 +18,7 @@
         <td><%= food.price %></td>
         <td><%= food.quantity %></td>
         <td>
-          <%= button_to "Delete", user_food_path(@user, food), method: :delete, class: "btn btn-link", data: { confirm: "Are you sure?" } %>
+          <%= button_to "Delete", user_food_path(@user, food), method: :delete, data: { confirm: "Are you sure?" } %>
         </td>
       </tr>
     <% end %>
