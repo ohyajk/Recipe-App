@@ -1,5 +1,4 @@
 class ShoppingListController < ApplicationController
-
   def index
     @user = current_user
     @recipe = Recipelist.where(user: @user)
