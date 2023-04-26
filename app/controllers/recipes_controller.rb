@@ -1,4 +1,4 @@
-class RecipelistsController < ApplicationController
+class RecipesController < ApplicationController
   before_action :authenticate_user!
   skip_before_action :authenticate_user!, only: %i[show]
 
