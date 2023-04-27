@@ -1,14 +1,20 @@
 class ShoppingListController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[index]
+  skip_before_action :authenticate_user!, only: [:index]
 
   def index
     @user = current_user
-    @recipe = Recipe.where(user: @user)
-    @ingredients = RecipeFood.where(recipe: @recipe).group_by { |ingredient| ingredient.food.name }
-    @total_price = @ingredients.map do |_food, ingredients|
-      ingredients.map do |ingredient|
-        ingredient.food.price * ingredient.quantity
-      end.sum
-    end.sum
+    @recipes = Recipe.where(user: @user)
+    @ingredients = calculate_shopping_list(@recipes)
+    @total_price = calculate_total_price(@ingredients)
+  end
+
+  private
+
+  def calculate_shopping_list(recipes)
+    RecipeFood.includes(food: :name).where(recipe: recipes).group_by { |ingredient| ingredient.food.name }
+  end
+
+  def calculate_total_price(ingredients)
+    ingredients.sum { |_food, ingredients| ingredients.sum { |ingredient| ingredient.food.price * ingredient.quantity } }
   end
 end
