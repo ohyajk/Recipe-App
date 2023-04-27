@@ -1,7 +1,18 @@
 class PublicRecipesController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[index]
+  skip_before_action :authenticate_user!, only: [:index]
+
   def index
-    @recipes = Recipe.where(public: true).includes(:user).order('created_at DESC')
-    @ingredients = RecipeFood.all
+    @recipes = fetch_public_recipes
+    @ingredients = load_recipe_food_ingredients
+  end
+
+  private
+
+  def fetch_public_recipes
+    Recipe.includes(:user).where(public: true).order(created_at: :desc)
+  end
+
+  def load_recipe_food_ingredients
+    RecipeFood.all
   end
 end
