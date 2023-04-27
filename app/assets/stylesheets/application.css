@@ -1,3 +1,58 @@
 :root {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
+.recipe-show {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.prep {
+  margin: 0 auto;
+  width: 150%;
+}
+
+.preparation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.check-box {
+  margin-left: 1%;
+}
+
+.recipe-show-buttons {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 250%;
+}
+
+.generate-shopping-list {
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 12px;
+  text-decoration: none;
+}
+
+.add-ingredient {
+  margin: 0 auto;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 12px;
+  text-decoration: none;
+  margin-left: 20%;
+}
+
+.recipe-show-line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 26%;
+  margin-top: 30px;
+  margin-left: 790px;
+}

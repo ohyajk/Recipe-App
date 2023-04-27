@@ -1,26 +1,30 @@
-<h1 class="text-center">Add Ingredient</h1>
-<%= form_with(model: [@recipe, @recipe_food], url: user_recipe_recipe_foods_path) do |form| %>
-  <% if recipe_food.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(recipe_food.errors.count, "error") %> prohibited this recipe_food from being saved:</h2>
+<h1 class="text-center">Food List</h1>
 
-      <ul>
-        <% recipe_food.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<div class="text-center">
+  <%= link_to "Add New Food", new_user_food_path(@user), class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+</div>
 
-  <h2>Select Ingredient</h2>
-
-  <p class="Food Name">Food name</p>
-  <%= form.collection_select(:food_id, Food.all, :id, :name, class: "form-select") %>
-
-  <br>
-  <p class="form-label">Quantity</p>
-  <%= form.number_field :quantity, class: "form-control mb-3" %>
-
-  <%= form.submit "Add Ingredient", class: "btn btn-outline-secondary" %>
-
-<% end %>
+<table class="mx-auto my-8">
+  <thead>
+    <tr>
+      <th class="text-center">Name</th>
+      <th class="text-center">Measurement Unit</th>
+      <th class="text-center">Price</th>
+      <th class="text-center">Quantity</th>
+      <th class="text-center">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @foods.each do |food| %>
+      <tr>
+        <td><%= food.name %></td>
+        <td><%= food.measurement_unit %></td>
+        <td><%= food.price %></td>
+        <td><%= food.quantity %></td>
+        <td>
+          <%= button_to "Delete", user_food_path(@user, food), method: :delete, data: { confirm: "Are you sure?" }, class: "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

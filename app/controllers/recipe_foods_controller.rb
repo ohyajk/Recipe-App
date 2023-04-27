@@ -1,15 +1,17 @@
 class RecipeFoodsController < ApplicationController
   def index
-    @recipe_foods = Foodlit.all
+    @recipe_foods = Food.all
   end
 
   def new
     @recipe_food = RecipeFood.new
     @recipe_food.recipe_id = params[:recipe_id]
+    @user = User.find(params[:user_id])
+    @foods = Food.all
   end
 
   def create
-    @recipe = Recipelist.find(params[:recipe_id])
+    @recipe = Recipe.find(params[:recipe_id])
     @recipe_food = @recipe.recipe_foods.new(recipe_food_params)
 
     respond_to do |format|

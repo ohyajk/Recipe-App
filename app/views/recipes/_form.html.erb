@@ -1,0 +1,47 @@
+<%= form_with(model: User.new, scope: :recipe, url: user_recipes_path) do |form| %>
+  <% if form.object.errors.any? %>
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6" role="alert">
+      <h2 class="font-bold mb-2"><%= pluralize(form.object.errors.count, "error") %> prohibited this recipe from being saved:</h2>
+
+      <ul class="list-disc ml-4">
+        <% form.object.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-4">
+    <%= form.label :name, "Recipe Name", for: "recipe_name", class: "block font-bold mb-1" %>
+    <%= form.text_field :name, id: "recipe_name", class: "form-input mt-1 block w-full" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :preparation_time, "Preparation Time (minutes)", class: "block font-bold mb-1" %>
+    <%= form.number_field :preparation_time, class: "form-input mt-1 block w-full" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :cooking_time, "Cooking Time (minutes)", class: "block font-bold mb-1" %>
+    <%= form.number_field :cooking_time, class: "form-input mt-1 block w-full" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :description, "Description", class: "block font-bold mb-1" %>
+    <%= form.text_area :description, class: "form-input mt-1 block w-full" %>
+  </div>
+
+  <div class="mb-4">
+    <%= form.label :public, "Make this recipe public?", class: "block font-bold mb-1" %>
+    <div class="relative inline-block w-10 mr-2 align-middle select-none">
+      <%= form.check_box :public, role: "switch", class: "form-checkbox h-6 w-6 text-green-500 transition duration-150 ease-in-out" %>
+      <span class="toggle__line w-6 h-6 bg-gray-400 rounded-full shadow-inner block"></span>
+    </div>
+  </div>
+
+  <%= form.hidden_field :user_id %>
+
+  <div>
+    <%= form.submit 'Create Recipe', class: "px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 transition duration-150 ease-in-out" %>
+  </div>
+<% end %>

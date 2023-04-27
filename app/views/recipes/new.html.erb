@@ -1,0 +1,9 @@
+<div class="max-w-2xl mx-auto">
+  <h1 class="text-3xl font-bold mb-6">New Recipe</h1>
+
+  <%= render "form", recipe: @recipe %>
+
+  <div class="mt-6">
+    <%= link_to "Back", user_recipes_path, class: "inline-block bg-gray-200 px-4 py-2 rounded-md text-gray-700 hover:bg-gray-300" %>
+  </div>
+</div>

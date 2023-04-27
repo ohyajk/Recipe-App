@@ -1,14 +1,18 @@
-<div id="<%= dom_id recipe %>" class="">
+<div class="border border-gray-200 rounded-lg p-4 mb-4 " style="border: 1px solid black">
   <div class="">
-    <div>
-      <h2><%= link_to user_recipe_path(recipe.user.id, recipe.id), class: "" do %>
-          <%= recipe.name%>
-        <% end %></h2>
-      <p>By: <%= recipe.user.name %></p>
-    </div>
-    <div>
-      <p>Total Food Items: <%= @ingredients.where(recipe: recipe).count %></p>
-      <p>Total Price: $<%= @ingredients.where(recipe: recipe).map {|value| value.food.price * value.quantity}.sum %></p>
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+      <div>
+        <h2 class="text-xl font-bold mb-2">
+          <%= link_to user_recipe_path(recipe.user.id, recipe.id), class:"text-gray-900 hover:text-gray-600 no-underline" do %>
+            <%= recipe.name%>
+          <% end %>
+        </h2>
+        <p class="text-gray-700">By: <%= recipe.user.name %></p>
+      </div>
+      <div class="mt-2 md:mt-0 flex flex-col md:flex-row">
+        <p class="text-gray-700 md:mr-6">Total Food Items: <%= @ingredients.where(recipe: recipe).count %></p>
+        <p class="text-gray-700">Total Price: $<%= @ingredients.where(recipe: recipe).map {|value| value.food.price * value.quantity}.sum %></p>
+      </div>
     </div>
   </div>
 </div>

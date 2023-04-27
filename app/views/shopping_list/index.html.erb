@@ -1,49 +1,43 @@
- <div class="">
-    <h2 class="">
-       Shopping List
-    </h2>
-
-    <div class="">
-       <div class="">
-           Amount of food items to buy: <%= @ingredients.length %>
-       </div>
-       <div class="">
-           Total value of food needed: $<%= @total_price %>
-       </div>
+<div class="bg-gray-100 px-4 py-6">
+  <h2 class="text-2xl font-bold mb-4">Shopping List</h2>
+  <div class="flex justify-between mb-4">
+    <div>
+      <p class="text-lg font-semibold">Amount of food items to buy: <%= @ingredients.length %></p>
     </div>
- </div>
- <div class="">
-    <table class="">
-      <thead>
-        <tr class="">
-          <th>Food</th>
-          <th>Quantity</th>
-          <th>Price</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @ingredients.each do |food, ingredients| %>
-        <tr class="">
-          <td><%= food %></td>
-          <td>
-            <% if ingredients.length == 1 %>
-              <span><%= ingredients.first.quantity %> <%= ingredients.first.food.measurement_unit %></span>
-            <% else %>
-              <% total_quantity = ingredients.map(&:quantity).sum %>
-              <span><%= total_quantity %> <%= ingredients.first.food.measurement_unit %></span>
-            <% end %>
-          </td>
-          <td>
-            <% if ingredients.length == 1 %>
-              $<%= ingredients.first.food.price * ingredients.first.quantity %>
-            <% else %>
-              <% total_price = ingredients.map { |ingredient| ingredient.quantity * ingredient.food.price }.sum %>
-              $<%= total_price %>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
+    <div>
+      <p class="text-lg font-semibold">Total value of food needed: $<%= @total_price %></p>
+    </div>
   </div>
+  <table class="w-full border-collapse">
+    <thead class="bg-gray-200">
+      <tr>
+        <th class="py-2 px-4 text-left text-lg font-semibold">Food</th>
+        <th class="py-2 px-4 text-left text-lg font-semibold">Quantity</th>
+        <th class="py-2 px-4 text-left text-lg font-semibold">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @ingredients.each do |food, ingredients| %>
+      <tr class="border-b-2 border-gray-300">
+        <td class="py-2 px-4"><%= food %></td>
+        <td class="py-2 px-4">
+          <% if ingredients.length == 1 %>
+            <span><%= ingredients.first.quantity %> <%= ingredients.first.food.measurement_unit %></span>
+          <% else %>
+            <% total_quantity = ingredients.map(&:quantity).sum %>
+            <span><%= total_quantity %> <%= ingredients.first.food.measurement_unit %></span>
+          <% end %>
+        </td>
+        <td class="py-2 px-4">
+          <% if ingredients.length == 1 %>
+            $<%= ingredients.first.food.price * ingredients.first.quantity %>
+          <% else %>
+            <% total_price = ingredients.map { |ingredient| ingredient.quantity * ingredient.food.price }.sum %>
+            $<%= total_price %>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
