@@ -1,0 +1,41 @@
+<div class="max-w-md mx-auto">
+  <h1 class="text-2xl font-bold mb-4">New Food</h1>
+
+  <%= form_with model: @food, url: user_foods_path, class: "space-y-4" do |f| %>
+    <div>
+      <%= f.label :name, class: "block font-semibold mb-2" %>
+      <%= f.text_field :name, class: "border rounded w-full py-2 px-3" %>
+    </div>
+
+    <div>
+      <%= f.label :measurement_unit, class: "block font-semibold mb-2" %>
+      <%= f.text_field :measurement_unit, class: "border rounded w-full py-2 px-3" %>
+    </div>
+
+    <div>
+      <%= f.label :price, class: "block font-semibold mb-2" %>
+      <%= f.text_field :price, class: "border rounded w-full py-2 px-3" %>
+    </div>
+
+    <div>
+      <%= f.label :quantity, class: "block font-semibold mb-2" %>
+      <%= f.number_field :quantity, class: "border rounded w-full py-2 px-3" %>
+    </div>
+
+    <div>
+      <%= f.submit "Create New Food", class: "bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-300 ease-in-out" %>
+    </div>
+  <% end %>
+
+  <% if @food.errors.any? %>
+    <div class="bg-red-100 text-red-900 p-4 rounded">
+      <h2 class="font-semibold mb-2"><%= pluralize(@food.errors.count, "error") %> prohibited this food from being saved:</h2>
+
+      <ul>
+        <% @food.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>

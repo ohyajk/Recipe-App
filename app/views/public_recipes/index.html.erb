@@ -1,0 +1,12 @@
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+  <h1 class="text-3xl font-bold text-gray-900 mb-6 text-center mt-6 mb-2">Public Recipes</h1>
+  <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+    <% if @recipes.any? %>
+      <% @recipes.each do |recipe| %>
+        <%= render "public_recipes", recipe: recipe %>
+      <% end %>
+    <% else %>
+      <p class="text-gray-600 text-base">No public recipes found</p>
+    <% end %>
+  </div>
+</div>
