@@ -6,7 +6,7 @@ FactoryBot.define do
 
     trait :with_recipe_foods do
       after(:create) do |recipe|
-        create_list(:recipe_food, 3, recipe:)
+        create_list(:recipe_food, 3, recipe: "#{recipe}")
       end
     end
   end

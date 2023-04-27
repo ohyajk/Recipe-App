@@ -51,8 +51,8 @@ RSpec.describe User, type: :model do
     )
     expect(user.foods).to be_empty
 
-    food1 = Food.create(name: 'Pizza', user:)
-    food2 = Food.create(name: 'Burger', user:)
+    food1 = Food.create(name: 'Pizza', user: 'John Does')
+    food2 = Food.create(name: 'Burger', user: 'John Does')
 
     expect(user.foods).to include(food1, food2)
   end
@@ -65,8 +65,8 @@ RSpec.describe User, type: :model do
     )
     expect(user.recipes).to be_empty
 
-    recipe1 = Recipe.create(name: 'Chocolate Cake', user:)
-    recipe2 = Recipe.create(name: 'Pasta Carbonara', user:)
+    recipe1 = Recipe.create(name: 'Chocolate Cake', user: 'John Does')
+    recipe2 = Recipe.create(name: 'Pasta Carbonara', user: 'John Does')
 
     expect(user.recipes).to include(recipe1, recipe2)
   end
