@@ -1,48 +1,51 @@
 class RecipesController < ApplicationController
-  before_action :authenticate_user!
-  skip_before_action :authenticate_user!, only: %i[show]
+  before_action :authenticate_user!, except: [:show]
+  before_action :set_recipe, only: %i[show destroy]
+  skip_before_action :authenticate_user!, only: [:show]
 
   def index
-    @recipes = if params[:user_id].present?
-                 Recipe.includes(recipe_foods: [:food]).order(:id)
-               else
-                 Recipe.all
-               end
+    @recipes = fetch_recipes
   end
 
   def show
-    @recipe = Recipe.find(params[:id])
-    return if @recipe.nil?
-
     @recipe_foods = @recipe.recipe_foods
   end
 
   def new
-    @recipe = Recipe.new
+    @recipe = current_user.recipes.build
   end
 
-  def edit; end
-
   def create
-    @recipe = Recipe.new(recipe_params)
-    @recipe.user_id = current_user.id
+    @recipe = current_user.recipes.build(recipe_params)
 
     if @recipe.save
-      redirect_to user_recipes_path(@recipe), notice: 'Recipelist was successfully created.'
+      redirect_to user_recipe_path(@recipe.user, @recipe), notice: 'Recipe was successfully created.'
     else
       render :new
     end
   end
 
   def destroy
-    @recipe = Recipe.find(params[:id])
     @recipe.destroy
-    redirect_to user_recipe_path, notice: 'Recipelist was successfully destroyed.'
+    redirect_to user_recipe_path(@recipe.user), notice: 'Recipe was successfully destroyed.'
   end
 
   private
 
+  def set_recipe
+    @recipe = Recipe.find_by(id: params[:id])
+    redirect_to root_path if @recipe.nil?
+  end
+
+  def fetch_recipes
+    if params[:user_id].present?
+      Recipe.includes(recipe_foods: [:food]).where(user_id: params[:user_id]).order(:id)
+    else
+      Recipe.all
+    end
+  end
+
   def recipe_params
-    params.require(:recipe).permit(:name, :preparation_time, :cooking_time, :description, :public, :user_id)
+    params.require(:recipe).permit(:name, :preparation_time, :cooking_time, :description, :public)
   end
 end
