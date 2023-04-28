@@ -1,9 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe 'Log In page', type: :feature do
-  before :each do
-    @user = User.new(name: 'Mohamed', email: 'hello@gmail.com', password: 'password')
-    @user.save
+  let(:user) { User.create(name: 'Kennedy Owusu', email: 'kenny@gmail.com', password: 'password') }
+
+  before(:each) do
+    sign_in_page
+  end
+
+  def sign_in_page
     visit new_user_session_path
   end
 
@@ -15,3 +19,4 @@ RSpec.describe 'Log In page', type: :feature do
     expect(page).to have_button('Log in')
   end
 end
+
