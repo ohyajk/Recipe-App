@@ -1,9 +1,9 @@
 require_relative '../rails_helper'
 
 RSpec.describe 'The page index page', type: :feature do
-    let(:user) { User.create(name: 'Kennedy Owusu', email: 'kenny@gmail.com', password: 'password') }
+  let(:user) { User.create(name: 'Kennedy Owusu', email: 'kenny@gmail.com', password: 'password') }
 
-    before(:each) do
+  before(:each) do
     sign_in(user)
     visit root_path
   end

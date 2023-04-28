@@ -16,7 +16,7 @@ RSpec.describe Food, type: :model do
     let(:food) { FactoryBot.create(:food) }
 
     it 'returns the total number of recipe_foods' do
-      FactoryBot.create_list(:recipe_food, 3, food: food)
+      FactoryBot.create_list(:recipe_food, 3, food:)
       expect(food.recipe_foods_count).to eq(3)
     end
   end
@@ -24,10 +24,9 @@ RSpec.describe Food, type: :model do
   describe 'callbacks' do
     it 'destroys associated recipe_foods when a food is destroyed' do
       food = FactoryBot.create(:food)
-      FactoryBot.create_list(:recipe_food, 3, food: food)
+      FactoryBot.create_list(:recipe_food, 3, food:)
 
       expect { food.destroy }.to change(RecipeFood, :count).by(-3)
     end
   end
 end
-

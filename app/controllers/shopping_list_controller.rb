@@ -15,6 +15,10 @@ class ShoppingListController < ApplicationController
   end
 
   def calculate_total_price(ingredients)
-    ingredients.sum { |_food, ingredients| ingredients.sum { |ingredient| ingredient.food.price * ingredient.quantity } }
+    ingredients.sum do |_food, ingredient_list|
+      ingredient_list.sum do |ingredient|
+        ingredient.food.price * ingredient.quantity
+      end
+    end
   end
 end

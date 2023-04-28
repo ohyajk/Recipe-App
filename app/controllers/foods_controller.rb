@@ -1,13 +1,12 @@
 class FoodsController < ApplicationController
-  before_action :set_food, only: [:show, :destroy]
+  before_action :set_food, only: %i[show destroy]
 
   def index
     @foods = Food.all
     @user = current_user
   end
 
-  def show
-  end
+  def show; end
 
   def destroy
     @food.destroy

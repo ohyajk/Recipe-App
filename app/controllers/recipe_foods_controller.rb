@@ -1,5 +1,5 @@
 class RecipeFoodsController < ApplicationController
-  before_action :set_recipe, only: [:new, :create]
+  before_action :set_recipe, only: %i[new create]
   before_action :set_recipe_food, only: [:destroy]
 
   def index

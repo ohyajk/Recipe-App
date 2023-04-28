@@ -2,8 +2,11 @@ require 'rails_helper'
 
 RSpec.describe 'Recipe Food page', type: :feature do
   let!(:user) { User.create!(name: 'Kennedy Owusu', email: 'kenny@gmail.com', password: 'password') }
-  let!(:recipe1) { Recipe.create!(name: 'Test 1', description: 'test description 1', public: true, preparation_time: 10, cooking_time: 10, user: user) }
-  let!(:recipe2) { Recipe.create!(name: 'Test Recipe 2', description: 'test description 2', public: false, user: user) }
+  let!(:recipe1) do
+    Recipe.create!(name: 'Test 1', description: 'test description 1', public: true, preparation_time: 10,
+                   cooking_time: 10, user:)
+  end
+  let!(:recipe2) { Recipe.create!(name: 'Test Recipe 2', description: 'test description 2', public: false, user:) }
 
   before(:each) do
     sign_in(user)

@@ -19,4 +19,3 @@ RSpec.describe 'Log In page', type: :feature do
     expect(page).to have_button('Log in')
   end
 end
-
